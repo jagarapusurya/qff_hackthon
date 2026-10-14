@@ -1,0 +1,4 @@
+Target,Depth,Total ops,CX,Routing CX overhead,Est. SWAPs (overhead/3)
+All-to-all (reference),28,49,14,0,0.0
+Processor A,35,59,24,10,3.3333333333333335
+Processor B,28,49,14,0,0.0

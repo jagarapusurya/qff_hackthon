@@ -1,0 +1,26 @@
+[
+  {
+    "Target":"All-to-all (reference)",
+    "Depth":28,
+    "Total ops":49,
+    "CX":14,
+    "Routing CX overhead":0,
+    "Est. SWAPs (overhead\/3)":0.0
+  },
+  {
+    "Target":"Processor A",
+    "Depth":35,
+    "Total ops":59,
+    "CX":24,
+    "Routing CX overhead":10,
+    "Est. SWAPs (overhead\/3)":3.33
+  },
+  {
+    "Target":"Processor B",
+    "Depth":28,
+    "Total ops":49,
+    "CX":14,
+    "Routing CX overhead":0,
+    "Est. SWAPs (overhead\/3)":0.0
+  }
+]

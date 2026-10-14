@@ -1,0 +1,36 @@
+[
+  {
+    "Processor":"Processor A",
+    "Physical qubits":5,
+    "Pairs benchmarked":30,
+    "Mean depth":34.7666666667,
+    "Mean total ops":58.7666666667,
+    "Mean CX gates":23.8666666667,
+    "Mean compile time (s)":0.0046520866,
+    "Mean execution time (s)":0.0117735541,
+    "Mean time \/ evaluation (s)":0.0164256408,
+    "Kernel entries needed (sym.)":4840,
+    "Est. total time (s)":79.5001013107,
+    "Total shots needed":19824640,
+    "Mean |noisy - ideal|":0.0211240421,
+    "Max |noisy - ideal|":0.1156726823,
+    "Mean binomial std. error":0.0040636214
+  },
+  {
+    "Processor":"Processor B",
+    "Physical qubits":9,
+    "Pairs benchmarked":30,
+    "Mean depth":27.7,
+    "Mean total ops":48.7,
+    "Mean CX gates":13.8,
+    "Mean compile time (s)":0.0049366272,
+    "Mean execution time (s)":0.0112140496,
+    "Mean time \/ evaluation (s)":0.0161506768,
+    "Kernel entries needed (sym.)":4840,
+    "Est. total time (s)":78.169275712,
+    "Total shots needed":19824640,
+    "Mean |noisy - ideal|":0.0167620629,
+    "Max |noisy - ideal|":0.0888172136,
+    "Mean binomial std. error":0.0040674676
+  }
+]

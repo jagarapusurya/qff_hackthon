@@ -1,0 +1,14 @@
+{
+  "name": "Processor A",
+  "role": "Baseline Reference",
+  "n_qubits": 5,
+  "topology": "linear chain",
+  "coupling_edges": [[0, 1], [1, 2], [2, 3], [3, 4]],
+  "bidirectional": true,
+  "initial_layout": [0, 1, 2, 3],
+  "layout_justification": "A linear chain has no cycle, so the 4-qubit ring (0-1, 1-2, 2-3, 3-0) cannot be embedded; the closing edge (3,0) is routed with SWAPs. Qubits 0-3 form the contiguous segment that minimises the routing distance.",
+  "basis_gates": ["rz", "sx", "x", "cx"],
+  "noise": {"p1": 0.001, "p2": 0.005, "p_readout": 0.01},
+  "transpile": {"optimization_level": 1, "seed_transpiler": 42},
+  "shots": 4096
+}

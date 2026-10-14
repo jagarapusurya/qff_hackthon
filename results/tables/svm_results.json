@@ -1,0 +1,18 @@
+{
+  "Accuracy":{
+    "Quantum kernel (ideal)":0.95,
+    "Classical RBF baseline":0.9
+  },
+  "Precision":{
+    "Quantum kernel (ideal)":1.0,
+    "Classical RBF baseline":1.0
+  },
+  "Recall":{
+    "Quantum kernel (ideal)":0.9,
+    "Classical RBF baseline":0.8
+  },
+  "F1":{
+    "Quantum kernel (ideal)":0.9474,
+    "Classical RBF baseline":0.8889
+  }
+}

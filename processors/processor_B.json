@@ -1,0 +1,14 @@
+{
+  "name": "Processor B",
+  "role": "Contemporary Reference",
+  "n_qubits": 9,
+  "topology": "sparse heavy-hex-inspired (12 edges)",
+  "coupling_edges": [[0, 1], [1, 2], [1, 6], [2, 3], [2, 6], [2, 5], [3, 4], [4, 5], [5, 6], [6, 7], [6, 8], [8, 0]],
+  "bidirectional": true,
+  "initial_layout": [0, 1, 6, 8],
+  "layout_justification": "The graph contains the 4-cycle 0-1-6-8-0. Mapping logical qubits 0,1,2,3 to physical 0,1,6,8 embeds the whole feature-map ring natively, so no SWAPs are required.",
+  "basis_gates": ["rz", "sx", "x", "cx"],
+  "noise": {"p1": 0.001, "p2": 0.005, "p_readout": 0.01},
+  "transpile": {"optimization_level": 1, "seed_transpiler": 42},
+  "shots": 4096
+}
