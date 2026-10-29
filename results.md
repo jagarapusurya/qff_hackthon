@@ -138,11 +138,11 @@ Produced by `python benchmark/qff_qml_benchmark.py processor_d_config.json`. The
 | Benchmark | Value |
 |-----------|-------|
 | QFT-3 depth (before transpile) | 6 |
-| QFT-3 depth (after transpile) | 21 |
-| Two-qubit gate count | 12 |
-| SWAP overhead | 1 |
+| QFT-3 depth (after transpile) | 18 |
+| Two-qubit gate count | 9 |
+| SWAP overhead | 0|
 | Fidelity (ideal) | 1.000 |
-| Fidelity (noisy) | 0.6268 |
+| Fidelity (noisy) | 0.6668|
 | Coupling map direction (one-way / two-way links) | two-way (7 links, 14 directed edges) |
 
 **Why this processor fits our circuit.** We compared four topologies on the official QFT-3 benchmark and on our own Q2 kernel circuit (`run_processor_d_sweep.py`, `processor_d_topology_sweep.csv`):
@@ -152,7 +152,8 @@ Produced by `python benchmark/qff_qml_benchmark.py processor_d_config.json`. The
 | Linear chain | 22 | 0.604 | 46 | 59 |
 | Ring | 22 | 0.604 | 24 | 41 |
 | Star | 22 | 0.604 | 36 | 57 |
-| **2×3 grid (chosen)** | **21** | **0.627** | **24** | **41** |
+| 2×3 grid (chosen) | 21 | 0.627 | 24 | 41 |
+|Ring + chord (0,2) (chosen)| 18 | 0.668 | 24 | 41 |
 
 Our kernel's entanglers form a logical 6-ring. The grid contains a 6-cycle, so the transpiler maps logical qubits 0…5 to physical 1, 0, 3, 4, 5, 2. Every RZZ then lands on a physical link and **no SWAPs are needed**: 24 CX at depth 41, the same as all-to-all connectivity. A linear chain needs 22 extra CX for routing (46), which at p₂ = 0.05 would multiply the no-error probability by about 0.95²² ≈ 0.32.
 
