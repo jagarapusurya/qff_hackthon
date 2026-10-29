@@ -29,6 +29,11 @@ def undirected_edges(topology):
     if topology == "ring": return [(i, (i+1) % N) for i in range(N)]
     if topology == "star": return [(0, i) for i in range(1, N)]
     if topology == "grid2x3": return [(0,1),(1,2),(3,4),(4,5),(0,3),(1,4),(2,5)]
+    # Ring plus one chord between qubits two apart: the chord closes a triangle (0-1-2), which the
+    # three interacting pairs of QFT-3 (Nielsen & Chuang, Box 5.1) need; a grid/ring/line has none.
+    if topology == "ring_chord": return [(i, (i+1) % N) for i in range(N)] + [(0, 2)]
+    # Grid plus a diagonal (also closes triangles), for comparison at one extra coupler.
+    if topology == "grid_diag": return [(0,1),(1,2),(3,4),(4,5),(0,3),(1,4),(2,5),(0,4)]
     raise ValueError(topology)
 
 
@@ -42,9 +47,35 @@ def config(topology):
       "noise_assumptions": {"single_qubit_error_rate":0.01,"two_qubit_error_rate":0.05,
         "readout_error_rate":0.02,"t1_us":100,"t2_us":80,
         "notes":"Reported assumptions for design context only. The official Task B uses QFF2026-v2 unchanged."},
-      "design_rationale": "A six-qubit bidirectional topology supports the six-qubit Q2 feature map with direct nearest-neighbour links. The rx/ry/rz/cx native gate set is universal and matches the organizer's fully-noised basis. Two-way links avoid direction-reversal overhead during routing. This candidate is selected by comparing the official QFT-3 noisy fidelity and the compiled depth and CX cost of the Q2 ring fidelity circuit; the benchmark noise model is unchanged.",
+      "design_rationale": "",   # filled in by build_rationale() for the selected topology
       "benchmark_results": {}
     }
+
+
+def build_rationale(best, df):
+    """Design rationale for the selected topology, with every number taken from the sweep table."""
+    r = {t: df[df.topology == t].iloc[0] for t in df.topology}
+    n_und = len(undirected_edges(best["topology"]))
+    q2 = f"{int(best['q2_ring_cx_count'])} CX and depth {int(best['q2_ring_depth_after_transpile'])}"
+    txt = (f"Our PS-Q2 kernel circuit is a 6-qubit ZZ fidelity circuit whose RZZ entanglers (CX-RZ-CX) act on a "
+           f"logical ring ({q2} in total). ")
+    if best["topology"] in ("ring_chord", "grid_diag"):
+        txt += ("The topology contains the physical 6-cycle, so the ring is placed with zero SWAPs at the same cost as "
+                "all-to-all. A chord closes a triangle, and the textbook QFT-3 (Nielsen and Chuang, Box 5.1) needs exactly "
+                "that: H with controlled-S and controlled-T gives interacting pairs (0,1), (0,2), (1,2), and the final "
+                "SWAP acts on (0,2). ")
+        if "grid2x3" in r and "ring" in r:
+            txt += (f"With the triangle the official QFT-3 needs {int(best['qft3_two_qubit_gate_count'])} two-qubit gates, "
+                    f"depth {int(best['qft3_circuit_depth_after_transpile'])}, swap overhead {int(best['qft3_swap_overhead'])} "
+                    f"and noisy fidelity {best['qft3_fidelity_noisy']:.3f}, versus "
+                    f"{int(r['grid2x3']['qft3_two_qubit_gate_count'])} gates, depth {int(r['grid2x3']['qft3_circuit_depth_after_transpile'])}, "
+                    f"overhead {int(r['grid2x3']['qft3_swap_overhead'])} and {r['grid2x3']['qft3_fidelity_noisy']:.3f} for the 2x3 grid, and "
+                    f"{r['ring']['qft3_fidelity_noisy']:.3f} for the bare ring. A grid, ring, line or star has no triangle, "
+                    f"so one QFT pair is never adjacent and routing adds a SWAP (3 CX). ")
+    txt += (f"All links are two-way because the benchmark enforces direction and one-way links add reversal gates. "
+            f"The rx, ry, rz and cx native gates are the organizer's fully-noised basis, so every compiled gate carries "
+            f"QFF2026-v2 noise. The cost is {n_und} couplers ({2*n_und} directed edges), one more than a bare ring.")
+    return txt
 
 
 def main():
@@ -54,7 +85,7 @@ def main():
     # Representative fidelity circuit uses the same six-qubit ring feature map.
     sample_circ = fidelity_circuit(ops, 6, Z[0], Z[1])
     rows=[]; configs={}
-    for topology in ("linear", "ring", "star", "grid2x3"):
+    for topology in ("linear", "ring", "star", "grid2x3", "ring_chord", "grid_diag"):
         cfg=config(topology)
         errs=validate_processor_d(cfg, require_results=False)
         if errs: raise RuntimeError(f"{topology} Processor D config invalid: {errs}")
@@ -74,10 +105,11 @@ def main():
         print(json.dumps(row, indent=2), flush=True)
     df=pd.DataFrame(rows)
     df.to_csv(OUT / "processor_d_topology_sweep.csv", index=False)
-    # Prioritize noisy QFT-3 fidelity; tie-break on lower Q2 circuit depth, then CX count.
-    best=df.sort_values(["qft3_fidelity_noisy","q2_ring_depth_after_transpile","q2_ring_cx_count"],
-                        ascending=[False,True,True]).iloc[0]
+    # Prioritize noisy QFT-3 fidelity; tie-break on lower Q2 circuit depth, then CX count, then fewer couplers.
+    best=df.sort_values(["qft3_fidelity_noisy","q2_ring_depth_after_transpile","q2_ring_cx_count",
+                         "directed_coupling_edges"], ascending=[False,True,True,True]).iloc[0]
     selected=configs[best["topology"]]
+    selected["design_rationale"]=build_rationale(best, df)
     selected["benchmark_results"]={k:best[k].item() if hasattr(best[k],"item") else best[k] for k in (
        "qft3_circuit_depth_before_transpile","qft3_circuit_depth_after_transpile",
        "qft3_two_qubit_gate_count","qft3_swap_overhead","qft3_fidelity_ideal",

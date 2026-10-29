@@ -1,5 +1,5 @@
 {
-  "processor_id": "qff26_procD_grid2x3_6q_v1",
+  "processor_id": "qff26_procD_ring_chord_6q_v1",
   "n_qubits": 6,
   "coupling_map": [
     [
@@ -11,24 +11,24 @@
       2
     ],
     [
+      2,
+      3
+    ],
+    [
       3,
       4
     ],
     [
       4,
       5
+    ],
+    [
+      5,
+      0
     ],
     [
       0,
-      3
-    ],
-    [
-      1,
-      4
-    ],
-    [
-      2,
-      5
+      2
     ],
     [
       1,
@@ -37,26 +37,26 @@
     [
       2,
       1
-    ],
-    [
-      4,
-      3
-    ],
-    [
-      5,
-      4
     ],
     [
       3,
-      0
+      2
     ],
     [
       4,
-      1
+      3
     ],
     [
       5,
-      2
+      4
+    ],
+    [
+      0,
+      5
+    ],
+    [
+      2,
+      0
     ]
   ],
   "native_gate_set": [
@@ -74,14 +74,14 @@
     "t2_us": 80,
     "notes": "Reported assumptions for design context only. The official Task B uses QFF2026-v2 unchanged."
   },
-  "design_rationale": "Our PS-Q2 kernel circuit is a 6-qubit ZZ fidelity circuit whose RZZ entanglers (CX-RZ-CX) act on a logical ring, 24 CX in total. The 2x3 grid contains a 6-cycle (physical 1-0-3-4-5-2), so the ring is placed with zero SWAPs at 24 CX and depth 41, the same as all-to-all, while a linear chain needs 46 CX and a star 36. The extra rung (1-4) shortens routing for the 3-qubit QFT, giving QFT-3 depth 21 and noisy fidelity 0.627 versus 0.604 for ring, linear and star; one SWAP remains because a grid has no triangles. All links are two-way because the benchmark enforces direction: with one-way links the same grid raises QFT-3 depth from 21 to 31 (fidelity 0.585) and our kernel circuit depth from 41 to 51. The native gates rx, ry, rz and cx are the organizer's fully-noised basis, so every compiled gate carries QFF2026-v2 noise. The trade-off is 7 couplers (14 directed edges) instead of a 6-link ring: they add hardware cost and no benefit for our ring circuit, but buy the cheaper QFT routing.",
+  "design_rationale": "Our PS-Q2 kernel circuit is a 6-qubit ZZ fidelity circuit whose RZZ entanglers (CX-RZ-CX) act on a logical ring (24 CX and depth 41 in total). The topology contains the physical 6-cycle, so the ring is placed with zero SWAPs at the same cost as all-to-all. A chord closes a triangle, and the textbook QFT-3 (Nielsen and Chuang, Box 5.1) needs exactly that: H with controlled-S and controlled-T gives interacting pairs (0,1), (0,2), (1,2), and the final SWAP acts on (0,2). With the triangle the official QFT-3 needs 9 two-qubit gates, depth 18, swap overhead 0 and noisy fidelity 0.668, versus 12 gates, depth 21, overhead 1 and 0.627 for the 2x3 grid, and 0.604 for the bare ring. A grid, ring, line or star has no triangle, so one QFT pair is never adjacent and routing adds a SWAP (3 CX). All links are two-way because the benchmark enforces direction and one-way links add reversal gates. The rx, ry, rz and cx native gates are the organizer's fully-noised basis, so every compiled gate carries QFF2026-v2 noise. The cost is 7 couplers (14 directed edges), one more than a bare ring.",
   "benchmark_results": {
     "qft3_circuit_depth_before_transpile": 6,
-    "qft3_circuit_depth_after_transpile": 21,
-    "qft3_two_qubit_gate_count": 12,
-    "qft3_swap_overhead": 1,
+    "qft3_circuit_depth_after_transpile": 18,
+    "qft3_two_qubit_gate_count": 9,
+    "qft3_swap_overhead": 0,
     "qft3_fidelity_ideal": 1.0,
-    "qft3_fidelity_noisy": 0.626784,
+    "qft3_fidelity_noisy": 0.668377,
     "benchmark_noise_model_version": "QFF2026-v2"
   }
 }
