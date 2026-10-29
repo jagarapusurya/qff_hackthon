@@ -1,0 +1,284 @@
+{
+  "subset_n300_same_folds": [
+    {
+      "model": "Quantum ZZ-ring kernel, ideal (statevector)",
+      "n": 300,
+      "accuracy": 0.7033333333333334,
+      "balanced_accuracy": 0.7033333333333334,
+      "precision_B": 0.7163120567375887,
+      "recall_B": 0.6733333333333333,
+      "f1_B": 0.6941580756013745,
+      "f1_macro": 0.7030660928168685,
+      "confusion_matrix_labels_A_B": [
+        [
+          110,
+          40
+        ],
+        [
+          49,
+          101
+        ]
+      ],
+      "roc_auc": 0.7627111111111111,
+      "fold_bal_acc_mean": 0.7033333333333334,
+      "fold_bal_acc_std": 0.04268749491621902,
+      "bal_acc_ci95": [
+        0.6504047021136741,
+        0.755934710490637
+      ]
+    },
+    {
+      "model": "Quantum ZZ-ring kernel, noisy (QFF2026-v2, 4096 shots)",
+      "n": 300,
+      "accuracy": 0.6866666666666666,
+      "balanced_accuracy": 0.6866666666666666,
+      "precision_B": 0.6866666666666666,
+      "recall_B": 0.6866666666666666,
+      "f1_B": 0.6866666666666666,
+      "f1_macro": 0.6866666666666666,
+      "confusion_matrix_labels_A_B": [
+        [
+          103,
+          47
+        ],
+        [
+          47,
+          103
+        ]
+      ],
+      "fold_bal_acc_mean": 0.6866666666666665,
+      "fold_bal_acc_std": 0.03231786571610886,
+      "bal_acc_ci95": [
+        0.6332687407923683,
+        0.741084757422337
+      ]
+    },
+    {
+      "model": "Classical RBF-SVM (PCA-6, C=1, gamma=scale)",
+      "n": 300,
+      "accuracy": 0.6833333333333333,
+      "balanced_accuracy": 0.6833333333333333,
+      "precision_B": 0.7099236641221374,
+      "recall_B": 0.62,
+      "f1_B": 0.6619217081850534,
+      "f1_macro": 0.6820580327759123,
+      "confusion_matrix_labels_A_B": [
+        [
+          112,
+          38
+        ],
+        [
+          57,
+          93
+        ]
+      ],
+      "fold_bal_acc_mean": 0.6833333333333333,
+      "fold_bal_acc_std": 0.038005847503304595,
+      "bal_acc_ci95": [
+        0.6270193466387154,
+        0.7358508701015644
+      ]
+    },
+    {
+      "model": "Classical RBF-SVM, tuned in each training fold (nested CV)",
+      "n": 300,
+      "accuracy": 0.6933333333333334,
+      "balanced_accuracy": 0.6933333333333334,
+      "precision_B": 0.7132352941176471,
+      "recall_B": 0.6466666666666666,
+      "f1_B": 0.6783216783216783,
+      "f1_macro": 0.692664023874215,
+      "confusion_matrix_labels_A_B": [
+        [
+          111,
+          39
+        ],
+        [
+          53,
+          97
+        ]
+      ],
+      "roc_auc": 0.7552888888888889,
+      "fold_bal_acc_mean": 0.6933333333333331,
+      "fold_bal_acc_std": 0.03741657386773943,
+      "chosen_params": "[{\"C\": 3, \"gamma\": 0.01}, {\"C\": 30, \"gamma\": 0.01}, {\"C\": 0.3, \"gamma\": 0.1}, {\"C\": 1, \"gamma\": 0.03}, {\"C\": 30, \"gamma\": 0.003}]",
+      "bal_acc_ci95": [
+        0.6399951853197674,
+        0.7449366773266591
+      ]
+    },
+    {
+      "model": "Classical poly-SVM, tuned in each training fold (nested CV)",
+      "n": 300,
+      "accuracy": 0.7166666666666667,
+      "balanced_accuracy": 0.7166666666666667,
+      "precision_B": 0.7407407407407407,
+      "recall_B": 0.6666666666666666,
+      "f1_B": 0.7017543859649122,
+      "f1_macro": 0.7159565580618212,
+      "confusion_matrix_labels_A_B": [
+        [
+          115,
+          35
+        ],
+        [
+          50,
+          100
+        ]
+      ],
+      "roc_auc": 0.7705333333333333,
+      "fold_bal_acc_mean": 0.7166666666666666,
+      "fold_bal_acc_std": 0.03333333333333334,
+      "chosen_params": "[{\"C\": 0.3, \"degree\": 2}, {\"C\": 1, \"degree\": 2}, {\"C\": 0.3, \"degree\": 2}, {\"C\": 0.3, \"degree\": 2}, {\"C\": 0.3, \"degree\": 2}]",
+      "bal_acc_ci95": [
+        0.6663834873243437,
+        0.7690340976202124
+      ]
+    }
+  ],
+  "paired_noise_effect": {
+    "bootstrap_paired_differences": {
+      "noisy_minus_ideal": {
+        "mean": -0.016401739416288537,
+        "ci95": [
+          -0.04779445363736227,
+          0.015704235937877745
+        ],
+        "p_le_0": 0.845
+      },
+      "noisy_minus_rbf_tuned": {
+        "mean": -0.006793710501877308,
+        "ci95": [
+          -0.040742954248947486,
+          0.02667780790257334
+        ],
+        "p_le_0": 0.667
+      },
+      "ideal_minus_rbf_tuned": {
+        "mean": 0.009608028914411225,
+        "ci95": [
+          -0.016603571427894037,
+          0.03750851865136303
+        ],
+        "p_le_0": 0.238
+      },
+      "noisy_minus_rbf_default": {
+        "mean": 0.0034034383985609806,
+        "ci95": [
+          -0.03722762313566351,
+          0.04333381502890173
+        ],
+        "p_le_0": 0.432
+      },
+      "noisy_minus_poly_tuned": {
+        "mean": -0.029883344779997104,
+        "ci95": [
+          -0.0676586088422887,
+          0.00787435747245747
+        ],
+        "p_le_0": 0.939
+      },
+      "ideal_minus_poly_tuned": {
+        "mean": -0.013481605363708571,
+        "ci95": [
+          -0.04710190024120229,
+          0.01865380744456839
+        ],
+        "p_le_0": 0.7975
+      }
+    },
+    "noisy_minus_ideal_mean": -0.016666666666666653,
+    "noisy_minus_ideal_se": 0.013944333775567915,
+    "per_fold_ideal": [
+      0.7666666666666667,
+      0.7,
+      0.7,
+      0.6333333333333333,
+      0.7166666666666667
+    ],
+    "per_fold_noisy": [
+      0.75,
+      0.6666666666666666,
+      0.6833333333333333,
+      0.6666666666666666,
+      0.6666666666666667
+    ],
+    "per_fold_diff": [
+      -0.01666666666666672,
+      -0.033333333333333326,
+      -0.016666666666666607,
+      0.033333333333333326,
+      -0.04999999999999993
+    ],
+    "noisy_vs_ideal_prediction_agreement": 0.9166666666666666
+  },
+  "kernel_signal_loss_n300": {
+    "n": 300,
+    "diag_ideal_mean": 0.9999999999999981,
+    "diag_noisy_mean": 0.31689127604166667,
+    "offdiag_mean_ideal": 0.6722508792552429,
+    "offdiag_mean_noisy": 0.22811702528393255,
+    "offdiag_std_ideal": 0.14736255990481426,
+    "offdiag_std_noisy": 0.04178557970830824,
+    "frobenius_rel_error_raw": 0.6637066331847629,
+    "mean_abs_error_raw": 0.44413385397131033,
+    "affine_slope": 0.2800742638439589,
+    "affine_intercept": 0.039836855158066405,
+    "affine_R2": 0.9755911621393667,
+    "spearman_rho": 0.9864065837236177,
+    "rel_error_after_affine_fit": 0.1562332802594675,
+    "alignment_ideal": 0.012577823615600772,
+    "alignment_noisy": 0.01014810153420282
+  },
+  "all_800_context": [
+    {
+      "model": "Quantum ZZ-ring kernel, ideal, n=800",
+      "n": 800,
+      "accuracy": 0.73625,
+      "balanced_accuracy": 0.7367587795048935,
+      "precision_B": 0.7569620253164557,
+      "recall_B": 0.7222222222222222,
+      "f1_B": 0.7391841779975278,
+      "f1_macro": 0.7362166149153252,
+      "confusion_matrix_labels_A_B": [
+        [
+          290,
+          96
+        ],
+        [
+          115,
+          299
+        ]
+      ],
+      "roc_auc": 0.807745738529699,
+      "fold_bal_acc_mean": 0.736723400020491,
+      "fold_bal_acc_std": 0.02627852884651849
+    },
+    {
+      "model": "Classical RBF-SVM (PCA-6, C=1, gamma=scale), n=800",
+      "n": 800,
+      "accuracy": 0.73,
+      "balanced_accuracy": 0.7300192736101725,
+      "precision_B": 0.7438423645320197,
+      "recall_B": 0.7294685990338164,
+      "f1_B": 0.7365853658536585,
+      "f1_macro": 0.7298311444652907,
+      "confusion_matrix_labels_A_B": [
+        [
+          282,
+          104
+        ],
+        [
+          112,
+          302
+        ]
+      ],
+      "roc_auc": 0.8030775199619534,
+      "fold_bal_acc_mean": 0.7299795903968693,
+      "fold_bal_acc_std": 0.019609588332152404
+    }
+  ],
+  "C": 1.0,
+  "cv": "StratifiedKFold(5, shuffle=True, random_state=42)",
+  "mitigation": "none (noise loss reported as a negative result)"
+}

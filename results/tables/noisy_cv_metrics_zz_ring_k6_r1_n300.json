@@ -1,0 +1,38 @@
+{
+  "evaluation": "5-fold stratified out-of-fold CV on fixed 300-sample training subset",
+  "model": "Noisy ZZ-ring fidelity-kernel SVM",
+  "feature_map": "zz",
+  "logical_topology": "ring",
+  "n_qubits": 6,
+  "reps": 1,
+  "s": 0.35,
+  "C": 1.0,
+  "shots": 4096,
+  "noise_model_version": "QFF2026-v2",
+  "n_samples": 300,
+  "class_counts": {
+    "A": 150,
+    "B": 150
+  },
+  "positive_class": "B",
+  "accuracy": 0.6866666666666666,
+  "balanced_accuracy": 0.6866666666666666,
+  "precision_B": 0.6866666666666666,
+  "recall_B": 0.6866666666666666,
+  "f1_B": 0.6866666666666666,
+  "precision_macro": 0.6866666666666666,
+  "recall_macro": 0.6866666666666666,
+  "f1_macro": 0.6866666666666666,
+  "confusion_matrix_labels_A_B": [
+    [
+      103,
+      47
+    ],
+    [
+      47,
+      103
+    ]
+  ],
+  "elapsed_seconds": 18710.48417849996,
+  "note": "Fold-specific scaler/PCA; official test features and labels are not used for evaluation. Metrics estimate performance on the selected 300-sample subset, not all 800 training samples or hidden test labels."
+}

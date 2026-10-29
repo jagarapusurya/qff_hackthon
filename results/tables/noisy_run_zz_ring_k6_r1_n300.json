@@ -1,0 +1,38 @@
+{
+  "tag": "zz_ring_k6_r1_n300",
+  "map": "zz",
+  "topology": "ring",
+  "k": 6,
+  "reps": 1,
+  "s": 0.35,
+  "n_sub": 300,
+  "subset_idx_seed": 42,
+  "class_counts": {
+    "A": 150,
+    "B": 150
+  },
+  "shots": 4096,
+  "noise_model_version": "QFF2026-v2",
+  "C_frozen_from_existing_noisy_CV": 1.0,
+  "train_kernel_expected_circuits": 45150,
+  "test_kernel_expected_circuits": 60000,
+  "note": "Train subset and official test cross-kernel; PCA/scaler fitted on all labeled training features only. Test labels are not accessed.",
+  "train_kernel_shape": [
+    300,
+    300
+  ],
+  "test_kernel_shape": [
+    200,
+    300
+  ],
+  "train_kernel_mean_diagonal": 0.31689128279685974,
+  "train_kernel_mean_offdiagonal": 0.22811703383922577,
+  "train_kernel_offdiagonal_std": 0.041785579174757004,
+  "prediction_counts": {
+    "A": 121,
+    "B": 79
+  },
+  "prediction_file": "predictions_q2.csv",
+  "status": "complete",
+  "completed_at_epoch": 1793296599.282239
+}

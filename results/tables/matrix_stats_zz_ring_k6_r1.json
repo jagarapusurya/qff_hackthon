@@ -1,0 +1,18 @@
+{
+  "n": 120,
+  "diag_ideal_mean": 0.9999999999999982,
+  "diag_noisy_mean": 0.3169026692708333,
+  "offdiag_mean_ideal": 0.6898351624952751,
+  "offdiag_mean_noisy": 0.2326507653842787,
+  "offdiag_std_ideal": 0.14461150536896777,
+  "offdiag_std_noisy": 0.040911386787499435,
+  "frobenius_rel_error_raw": 0.6656635327014114,
+  "mean_abs_error_raw": 0.45718439711099645,
+  "affine_slope": 0.2790772703635343,
+  "affine_intercept": 0.040133451234312306,
+  "affine_R2": 0.9731196107751664,
+  "spearman_rho": 0.9846184107964148,
+  "rel_error_after_affine_fit": 0.1639523992652549,
+  "alignment_ideal": 0.011773486994128949,
+  "alignment_noisy": 0.009474326273417665
+}

@@ -1,0 +1,87 @@
+{
+  "processor_id": "qff26_procD_grid2x3_6q_v1",
+  "n_qubits": 6,
+  "coupling_map": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      2
+    ]
+  ],
+  "native_gate_set": [
+    "rx",
+    "ry",
+    "rz",
+    "cx"
+  ],
+  "qubit_layout": "custom",
+  "noise_assumptions": {
+    "single_qubit_error_rate": 0.01,
+    "two_qubit_error_rate": 0.05,
+    "readout_error_rate": 0.02,
+    "t1_us": 100,
+    "t2_us": 80,
+    "notes": "Reported assumptions for design context only. The official Task B uses QFF2026-v2 unchanged."
+  },
+  "design_rationale": "Our PS-Q2 kernel circuit is a 6-qubit ZZ fidelity circuit whose RZZ entanglers (CX-RZ-CX) act on a logical ring, 24 CX in total. The 2x3 grid contains a 6-cycle (physical 1-0-3-4-5-2), so the ring is placed with zero SWAPs at 24 CX and depth 41, the same as all-to-all, while a linear chain needs 46 CX and a star 36. The extra rung (1-4) shortens routing for the 3-qubit QFT, giving QFT-3 depth 21 and noisy fidelity 0.627 versus 0.604 for ring, linear and star; one SWAP remains because a grid has no triangles. All links are two-way because the benchmark enforces direction: with one-way links the same grid raises QFT-3 depth from 21 to 31 (fidelity 0.585) and our kernel circuit depth from 41 to 51. The native gates rx, ry, rz and cx are the organizer's fully-noised basis, so every compiled gate carries QFF2026-v2 noise. The trade-off is 7 couplers (14 directed edges) instead of a 6-link ring: they add hardware cost and no benefit for our ring circuit, but buy the cheaper QFT routing.",
+  "benchmark_results": {
+    "qft3_circuit_depth_before_transpile": 6,
+    "qft3_circuit_depth_after_transpile": 21,
+    "qft3_two_qubit_gate_count": 12,
+    "qft3_swap_overhead": 1,
+    "qft3_fidelity_ideal": 1.0,
+    "qft3_fidelity_noisy": 0.626784,
+    "benchmark_noise_model_version": "QFF2026-v2"
+  }
+}

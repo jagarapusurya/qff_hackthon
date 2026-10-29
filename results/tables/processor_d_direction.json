@@ -1,0 +1,55 @@
+{
+  "q2_circuit_all_to_all": {
+    "depth": 41,
+    "cx": 24,
+    "ops": 66
+  },
+  "two_way": {
+    "directed_edges": 14,
+    "qft3": {
+      "qft3_circuit_depth_before_transpile": 6,
+      "qft3_circuit_depth_after_transpile": 21,
+      "qft3_two_qubit_gate_count": 12,
+      "qft3_swap_overhead": 1,
+      "qft3_fidelity_ideal": 1.0,
+      "qft3_fidelity_noisy": 0.626784,
+      "benchmark_noise_model_version": "QFF2026-v2"
+    },
+    "q2_depth": 41,
+    "q2_cx": 24,
+    "q2_ops": 66,
+    "q2_swap_overhead_cx": 0,
+    "q2_logical_to_physical": [
+      1,
+      0,
+      3,
+      4,
+      5,
+      2
+    ]
+  },
+  "one_way": {
+    "directed_edges": 7,
+    "qft3": {
+      "qft3_circuit_depth_before_transpile": 6,
+      "qft3_circuit_depth_after_transpile": 31,
+      "qft3_two_qubit_gate_count": 12,
+      "qft3_swap_overhead": 1,
+      "qft3_fidelity_ideal": 1.0,
+      "qft3_fidelity_noisy": 0.585432,
+      "benchmark_noise_model_version": "QFF2026-v2"
+    },
+    "q2_depth": 51,
+    "q2_cx": 24,
+    "q2_ops": 80,
+    "q2_swap_overhead_cx": 0,
+    "q2_logical_to_physical": [
+      1,
+      0,
+      3,
+      4,
+      5,
+      2
+    ]
+  }
+}

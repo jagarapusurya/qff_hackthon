@@ -1,0 +1,35 @@
+{
+  "tag": "classical_rbf_svm_5fold_n300",
+  "model": "RBF-SVM",
+  "kernel": "rbf",
+  "C": 1.0,
+  "gamma": "scale",
+  "preprocessing": "StandardScaler + PCA(6), fitted separately inside each fold",
+  "cv": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42)",
+  "subset_size": 300,
+  "subset_indices_file": "results\\tables\\subset_idx_zz_ring_k6_r1_n300.npy",
+  "class_counts": {
+    "B": 150,
+    "A": 150
+  },
+  "positive_class_for_binary_metrics": "B",
+  "accuracy": 0.6833333333333333,
+  "balanced_accuracy": 0.6833333333333333,
+  "precision_B": 0.7099236641221374,
+  "recall_B": 0.62,
+  "f1_B": 0.6619217081850534,
+  "macro_precision": 0.6863227788066308,
+  "macro_recall": 0.6833333333333333,
+  "macro_f1": 0.6820580327759123,
+  "confusion_matrix_labels_A_B": [
+    [
+      112,
+      38
+    ],
+    [
+      57,
+      93
+    ]
+  ],
+  "note": "Out-of-fold CV metrics on the selected 300 training rows; these are not hidden-test metrics."
+}

@@ -1,0 +1,25 @@
+{
+  "n_circuits": 7260,
+  "seconds": 85.345640084,
+  "shots": 4096,
+  "mean_depth": 41.0,
+  "mean_cx": 24.0,
+  "mean_ops": 66.0,
+  "tag": "zz_ring_k6_r1",
+  "map": "zz",
+  "topology": "ring",
+  "k": 6,
+  "reps": 1,
+  "s": 0.35,
+  "n_sub": 120,
+  "subset_idx_seed": 42,
+  "fidelity_circuit_depth": 41,
+  "fidelity_circuit_cx": 24,
+  "fidelity_circuit_ops": {
+    "rz": 24,
+    "cx": 24,
+    "ry": 12,
+    "measure": 6,
+    "barrier": 1
+  }
+}

@@ -1,0 +1,5 @@
+topology,qft3_circuit_depth_before_transpile,qft3_circuit_depth_after_transpile,qft3_two_qubit_gate_count,qft3_swap_overhead,qft3_fidelity_ideal,qft3_fidelity_noisy,benchmark_noise_model_version,q2_ring_depth_after_transpile,q2_ring_cx_count,q2_ring_total_ops,directed_coupling_edges
+linear,6,22,12,1,1.0,0.603585,QFF2026-v2,59,46,88,10
+ring,6,22,12,1,1.0,0.603585,QFF2026-v2,41,24,66,12
+star,6,22,12,1,1.0,0.603585,QFF2026-v2,57,36,78,10
+grid2x3,6,21,12,1,1.0,0.626784,QFF2026-v2,41,24,66,14
